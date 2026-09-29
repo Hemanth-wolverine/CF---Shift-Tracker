@@ -1,0 +1,22 @@
+services:
+  shift-tracker:
+    build: .
+    image: shift-tracker:latest
+    container_name: shift-tracker
+    restart: unless-stopped
+    init: true                      # forwards stop signals so the DB closes cleanly
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    environment:
+      LEAD_PIN: ${LEAD_PIN:?Set LEAD_PIN in .env}
+      DB_FILE: /data/tracker.db
+    volumes:
+      - shift-data:/data            # SQLite database persists here across rebuilds
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  shift-data:

@@ -1,0 +1,16 @@
+{
+  "name": "shift-tracker",
+  "version": "1.0.0",
+  "description": "Team time tracker: hours logged vs. scheduled shift hours",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($f = Get-Item -Force .git; if \\(-not $f.PSIsContainer -and $f.Length -eq 0\\) { Remove-Item -Force .git -Confirm:$false; git init; git status --short } else { \"Not an empty file - leaving it alone: $\\($f.Mode\\) $\\($f.Length\\)\" })"
+    ]
+  }
+}

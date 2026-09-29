@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shift Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div>
+        <h1 id="teamName">Shift Tracker</h1>
+        <p class="sub">Time tracking for your shifts</p>
+      </div>
+      <label class="who">I am
+        <select id="whoSelect"><option value="">Select your name</option></select>
+      </label>
+    </div>
+    <nav class="wrap tabs" role="tablist">
+      <button role="tab" data-tab="log" aria-selected="true">Log time</button>
+      <button role="tab" data-tab="dash" aria-selected="false">Dashboard</button>
+      <button role="tab" data-tab="settings" aria-selected="false">Settings</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- LOG TIME -->
+    <section id="tab-log">
+      <div class="card">
+        <h2>Log your shift</h2>
+        <div class="row">
+          <label>Shift date <input type="date" id="logDate"></label>
+          <label class="grow">Shift <select id="logShift"></select></label>
+        </div>
+        <p class="hint" id="overnightHint" hidden>Overnight shift: use the date the shift started.</p>
+
+        <div class="progress" id="logProgress"></div>
+
+        <table class="tbl" id="logTable">
+          <thead><tr><th>Category</th><th>Task</th><th class="r">Hours</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+
+        <form class="row add" id="addForm">
+          <label>Hours <input type="number" id="addHours" min="0.25" max="24" step="0.25" required></label>
+          <label>Category <select id="addCategory"></select></label>
+          <label class="grow">What did you work on? <input type="text" id="addTask" maxlength="200"></label>
+          <button class="btn primary" type="submit">Add hours</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Your recent shifts</h2>
+        <div id="recent"></div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="tab-dash" hidden>
+      <div class="card row filters">
+        <label>Period
+          <select id="dashPreset">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="week">This week</option>
+            <option value="last7">Last 7 days</option>
+            <option value="month">This month</option>
+            <option value="lastmonth">Last month</option>
+            <option value="custom">Custom</option>
+          </select>
+        </label>
+        <label class="custom" hidden>From <input type="date" id="dashFrom"></label>
+        <label class="custom" hidden>To <input type="date" id="dashTo"></label>
+        <label>Shift <select id="dashShift"></select></label>
+        <span class="grow"></span>
+        <a class="btn" id="csvLink">Download CSV</a>
+        <a class="btn primary" id="xlsxLink">Download Excel report</a>
+      </div>
+      <div id="dashBody"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" hidden>
+      <div class="card" id="pinCard">
+        <h2>Team lead access</h2>
+        <form class="row" id="pinForm">
+          <label>Lead PIN <input type="password" id="pinInput" autocomplete="off" required></label>
+          <button class="btn primary" type="submit">Unlock settings</button>
+        </form>
+      </div>
+      <div id="settingsBody" hidden></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
